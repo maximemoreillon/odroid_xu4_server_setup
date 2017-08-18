@@ -1,0 +1,4 @@
+
+secrets.conf
+configuration_files/apache_files/hass.conf
+configuration_files/apache_files/default_https.conf
