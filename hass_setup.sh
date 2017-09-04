@@ -12,25 +12,26 @@ then
    exit 1
 fi
 
-### Parameters
-
+# Parameters
+## Get secrets
 echo -n "-- Retrieving secrets: "
 source ./secrets.conf && echo -e "\e[32mOK\e[39m" || { echo -e "\e[31mERROR\e[39m"; exit 1; }
 
+## Mosquitto credentials retrieved from secrets
 mosquitto_username=$USERNAME
 mosquitto_password=$PASSWORD
 
-## files
-# Mosquitto config file
+# files copy
+## Mosquitto config file
 mosquitto_conf_source="./configuration_files/mosquitto.conf"
 mosquitto_conf_destination="/etc/mosquitto/mosquitto.conf"
 
-# Systemd service file for autostart
+## Systemd service file for autostart
 home_assistant_service="home-assistant@homeassistant.service"
 home_assistant_service_source="./configuration_files/$home_assistant_service"
 home_assistant_service_destination="/etc/systemd/system/$home_assistant_service" # CHECK THIS ONE
 
-# Apache site
+## Apache site
 hass_conf="hass.conf"
 hass_conf_source="./configuration_files/apache_files/$hass_conf"
 hass_conf_destination="/etc/apache2/sites-available/$hass_conf"
