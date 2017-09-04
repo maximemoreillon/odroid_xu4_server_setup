@@ -18,6 +18,7 @@ crontab_path="/etc/crontab"
 echo -n "-- Retrieving secrets: "
 source ./secrets.conf && echo -e "\e[32mOK\e[39m" || { echo -e "\e[31mERROR\e[39m"; exit 1; }
 
+# Token and domains retrieved from secrets
 duckdns_token=$DUCKDNS_TOKEN
 duckdns_domains=$DUCKDNS_DOMAINS
 
