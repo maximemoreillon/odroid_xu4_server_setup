@@ -1,4 +1,4 @@
-# odroid_xu4_server_setup
+# ODROID XU4 server setup
 
 Those are scripts to setup an Odroid XU4 with the following:
 
@@ -8,4 +8,4 @@ Those are scripts to setup an Odroid XU4 with the following:
 * LAMP with NextCloud instance
 * Home assistant with mosquitto MQTT broker
 
-
+These scripts are intended to be used with the Ubuntu 16.04 MINIMAL image provided by HardKernel
