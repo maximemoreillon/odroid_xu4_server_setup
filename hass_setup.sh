@@ -42,12 +42,6 @@ mosquitto_password_file="/etc/mosquitto/passwd"
 
 echo "-- Home assistant installation"
 
-# Packages
-echo -n "-- Installing packages: "
-apt-get -y -qq install python-pip python3-dev &>/dev/null || { echo -e "\e[31mERROR\e[39m"; exit 1; }
-pip install --upgrade virtualenv &>/dev/null || { echo -e "\e[31mERROR\e[39m"; exit 1; }
-echo -e "\e[32mOK\e[39m"
-
 # Creat homeassistant user
 echo -n "-- Creating homeassistant user: "
 adduser --system homeassistant &>/dev/null || { echo -e "\e[31mERROR\e[39m"; exit 1; }
@@ -55,18 +49,19 @@ addgroup homeassistant &>/dev/null || { echo -e "\e[31mERROR\e[39m"; exit 1; }
 adduser homeassistant homeassistant &>/dev/null || { echo -e "\e[31mERROR\e[39m"; exit 1; }
 echo -e "\e[32mOK\e[39m"
 
-# Creat home assistant directory
-echo -n "-- Creating homeassistant install directory: "
-mkdir /srv/homeassistant || { echo -e "\e[31mERROR\e[39m"; exit 1; }
-chown homeassistant:homeassistant /srv/homeassistant || { echo -e "\e[31mERROR\e[39m"; exit 1; }
+# Packages
+echo -n "-- Installing packages: "
+apt-get -y -qq install python3-pip python3-venv &>/dev/null || { echo -e "\e[31mERROR\e[39m"; exit 1; }
 echo -e "\e[32mOK\e[39m"
 
 # Install per se
 echo "-- Installing Home Assistant"
+
+# Commands are executed as the user "homeassistant"
 su -s /bin/bash homeassistant <<EOF
-  virtualenv -p python3 /srv/homeassistant
-  source /srv/homeassistant/bin/activate
-  pip3 install --upgrade homeassistant
+  virtualenv -p python3 /home/homeassistant/homeassistantvenv
+  source /home/homeassistant/homeassistantvenv/bin/activate
+  python3 -m pip install homeassistant
 EOF
 
 ## Autostart

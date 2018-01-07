@@ -21,8 +21,8 @@ systemctl stop $home_assistant_service &>/dev/null && echo -e "\e[32mOK\e[39m" |
 
 echo "- Upgrading Home Assistant: "
 su -s /bin/bash homeassistant <<EOF
-  source /srv/homeassistant/bin/activate
-  pip3 install --upgrade homeassistant
+  source /home/homeassistant/homeassistantvenv/bin/activate
+  python3 -m pip install --upgrade homeassistant
 EOF
 
 echo -n "-Restarting Home Assistant: "
